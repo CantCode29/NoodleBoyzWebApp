@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noodle Haven - Menu</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #D32F2F; /* Soft red */
+      color: #FFF9C4; /* Pale yellow */
+      text-align: center;
+      padding: 15px 0;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.8em;
+      font-weight: 500;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      border-radius: 4px;
+      transition: transform 0.2s ease;
+    }
+    .menu-item:hover {
+      transform: translateY(-2px);
+    }
+    .menu-item img {
+      width: 90px;
+      height: 90px;
+      margin-right: 15px;
+      border-radius: 4px;
+    }
+    .menu-item div {
+      flex-grow: 1;
+    }
+    .menu-item h3 {
+      margin: 0 0 5px;
+      color: #D32F2F; /* Soft red */
+      font-size: 1.2em;
+      font-weight: 500;
+    }
+    .menu-item p {
+      margin: 0;
+      color: #666;
+      font-size: 1em;
+    }
+    .menu-item button {
+      background-color: #FFF9C4; /* Pale yellow */
+      color: #D32F2F; /* Soft red */
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    .menu-item button:hover {
+      background-color: #f0e8a0; /* Slightly darker pale yellow */
+    }
+    .cart {
+      padding: 15px;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      border-radius: 4px;
+    }
+    .cart h2 {
+      color: #D32F2F; /* Soft red */
+      margin-top: 0;
+      font-size: 1.4em;
+      font-weight: 500;
+    }
+    .cart p {
+      margin: 5px 0;
+      color: #666;
+    }
+    .cart button {
+      background-color: #FFF9C4; /* Pale yellow */
+      color: #D32F2F; /* Soft red */
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    .cart button:hover {
+      background-color: #f0e8a0; /* Slightly darker pale yellow */
+    }
+    .ad {
+      background-color: #FFF9C4; /* Pale yellow */
+      color: #D32F2F; /* Soft red */
+      padding: 10px;
+      text-align: center;
+      margin-top: 20px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+  </style>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Noodle Haven</h1>
+  </header>
+  <div id="menu">
+    <div class="menu-item" data-id="KELLOGS" data-price="200.00">
+      <img src="{{ url_for('static', filename='images/kellogs Beef Flavour.jpg') }}" alt="Kellogs Noodles">
+      <div>
+        <h3>Kellogs Noodles</h3>
+        <p>R200.00</p>
+      </div>
+      <button onclick="addToCart('KELLOGS', 'Kellogs Noodles', 200.00)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="INDOMIE" data-price="280.00">
+      <img src="{{ url_for('static', filename='images/Kellogs Cheese Flavour.jpg') }}" alt="Kellogs Noodles">
+      <div>
+        <h3>Indomie Noodles</h3>
+        <p>R280.00</p>
+      </div>
+      <button onclick="addToCart('Kellogs Cheese', 'Kellogs Noodles', 280.00)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="MAGGI" data-price="220.00">
+      <img src="{{ url_for('static', filename='images/Kellogs Durban Curry.jpg') }}" alt="Maggi Noodles">
+      <div>
+        <h3>Maggi Noodles</h3>
+        <p>R220.00</p>
+      </div>
+      <button onclick="addToCart('MAGGI', 'Maggi Noodles', 220.00)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="YIPPEE" data-price="250.00">
+      <img src="{{ url_for('static', filename='images/Kellogs hot n spicy.jpg') }}" alt="Kellogs hot Noodles">
+      <div>
+        <h3>Yippee Noodles</h3>
+        <p>R250.00</p>
+      </div>
+      <button onclick="addToCart('Kellogs hot', 'Kellogs hot', 250.00)">Add to Cart</button>
+    </div>
+  </div>
+  <div class="cart" id="cart">
+    <h2>Cart</h2>
+    <p id="cart-items"></p>
+    <p>Total: R<span id="total">0.00</span></p>
+    <button onclick="placeOrder()">Order Now</button>
+  </div>
+  <div class="ad">
+    <p>Special Offer: Buy 2, Get 1 Free!</p>
+  </div>
+</body>
+</html>
