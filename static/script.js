@@ -6,12 +6,19 @@ function addToCart(id, name, price) {
   updateCart();
 }
 
+function updateQuantity(id, change) {
+  if (cart[id]) {
+    cart[id].quantity += change;
+    if (cart[id].quantity <= 0) {
+      delete cart[id]; // Remove item if quantity is 0 or negative
+    }
+    updateCart();
+  }
+}
+
 function removeItem(id) {
   if (cart[id]) {
-    cart[id].quantity--; // Decrement quantity by 1
-    if (cart[id].quantity <= 0) {
-      delete cart[id]; // Remove item only if quantity is 0 or negative
-    }
+    delete cart[id]; // Immediately remove the item
     updateCart();
   }
 }
@@ -20,15 +27,28 @@ function updateCart() {
   let itemsHtml = '';
   let total = 0;
   let itemCount = 0;
+  // Base URL for static files (adjust if your app runs on a different path)
+  let staticBase = '/static/Images/';
   for (let id in cart) {
     let item = cart[id];
-    itemsHtml += `${item.name} x${item.quantity} - R${(item.price * item.quantity).toFixed(2)} <button onclick="removeItem('${id}')">Remove</button><br>`;
+    itemsHtml += `
+      <div style="display: flex; align-items: center; margin-bottom: 10px;">
+        <img src="${staticBase}${id.replace(/ /g, '%20')}.jpg" alt="${item.name}" style="width: 50px; height: 50px; margin-right: 10px;">
+        <div style="flex-grow: 1; display: flex; align-items: center;">
+          <button onclick="updateQuantity('${id}', -1)">-</button>
+          <span style="margin: 0 10px;">${item.quantity}</span>
+          <button onclick="updateQuantity('${id}', 1)">+</button>
+        </div>
+        <span style="margin: 0 10px; min-width: 60px; text-align: right;">R${(item.price * item.quantity).toFixed(2)}</span>
+        <button onclick="removeItem('${id}')">Remove</button>
+      </div>
+    `;
     total += item.price * item.quantity;
     itemCount += item.quantity;
   }
   document.getElementById('cart-items').innerHTML = itemsHtml || 'Cart is empty';
   document.getElementById('total').textContent = total.toFixed(2);
-  document.getElementById('cart-toggle').textContent = `Cart (${itemCount} items)`; // Update cart toggle text
+  document.getElementById('cart-toggle').textContent = `Cart (${itemCount} images)`; // Fixed typo from 'items'
 }
 
 function placeOrder() {
