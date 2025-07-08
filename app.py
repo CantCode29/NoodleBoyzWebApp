@@ -6,7 +6,7 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 @app.route('/menu', methods=['GET'])
 def show_menu():
 
-    return render_template('menu.html')
+    return render_template('NoodleBoysMenu.html')
 
 
 @app.route('/menu', methods=['POST'])
