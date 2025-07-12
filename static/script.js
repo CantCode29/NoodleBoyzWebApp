@@ -62,7 +62,7 @@ function placeOrder() {
   let total = Object.values(cart).reduce((sum, { price, quantity }) => sum + price * quantity, 0).toFixed(2);
   let session_id = new URLSearchParams(window.location.search).get('session_id') || 'default_session';
 
-  fetch('https://n8n.srv815441.hstgr.cloud/webhook/6ed52655-dfd5-48a6-a1a7-6392f159653d/' + session_id, {
+  fetch('https://n8n.srv815441.hstgr.cloud/webhook/6ed52655-dfd5-48a6-a1a7-6392f159653d/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ session_id, items, total })
